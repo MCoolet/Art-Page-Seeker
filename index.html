@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seeker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: rgb(0, 0, 0);
+            color: rgb(226, 199, 173);
+            padding: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            border: 2px solid rgb(227, 165, 228);
+            padding: 5px 10px;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
+        .search-container input[type="text"] {
+            width: 200px;
+            padding: 10px 30px 10px 10px;
+            border: 2px solid #ffffff;
+            background-color: #626262;
+            color: rgb(75, 172, 37);
+            outline: none;
+            text-align: center;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            transition: background-color 0.3s, border-color 0.3s;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Glass_%28search_button%29.svg/768px-Glass_%28search_button%29.svg.png');
+            background-size: 20px;
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+        .search-container input[type="text"]:focus {
+            background-color: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            border-color: #55d0d9;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        .nav-links a {
+            color: rgb(255, 255, 255);
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+            margin-left: 20px;
+        }
+        .nav-links a:hover {
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+        }
+        .main-banner {
+            background-image: url('pexels-adrien-olichon-.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 350px;
+            width: 80%;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(0, 0, 0);
+            text-align: center;
+            font-size: 2em;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        }
+        .main-banner:active {
+            transform: translateY(10px);
+        }
+        .products {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        .product {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 30%;
+            margin: 10px;
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+        }
+        .product:hover {
+            transform: scale(1.05);
+        }
+        .buy-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        .buy-button:hover {
+            background-color: #45a049;
+        }
+        .modal, .sign-in-modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content, .sign-in-modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        @keyframes zoom {
+            from {transform: scale(0)}
+            to {transform: scale(1)}
+        }
+        .close {
+            color: #aaa;
+            align-self: flex-end;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        footer {
+            background-color: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">S</div>
+        <div class="nav-links">
+            <a href="#help">Help</a>
+            <a href="javascript:void(0);" onclick="openSignInModal()">Sign In</a>
+        </div>
+        <div class="search-container">
+            <input type="text" placeholder="Search...">
+        </div>
+    </header>
+    <div class="main-banner">
+        <div>Make it Happen.</div>
+    </div>
+    <div class="products" id="men">
+        <div class="product" data-description="Photoshop Brushes. This is good for Splash art for Illustration." onclick="openModal('product1')">
+            <img src="Painting2.png" alt="Product 1"> <!-- Replace with actual product image URLs -->
+            <h2>Paint Brushes</h2>
+            <p>$100.00</p>
+            <button class="buy-button">Buy</button>
+        </div>
+        <div class="product" data-description="This product will enhance Drawing sense that you feel still like drawing in paper" onclick="openModal('product2')">
+            <img src="Sketches1.png" alt="Product 2">
+            <h2>Pencil Brushes</h2>
+            <p>$40.00</p>
+            <button class="buy-button">Buy</button>
+        </div>
+        <div class="product" data-description="Comfort and style combined in this product." onclick="openModal('product3')">
+            <img src="TestureBrushesh.png" alt="Product 3">
+            <h2>Textured Brushes</h2>
+            <p>$190.00</p>
+            <button class="buy-button">Buy</button>
+        </div>
+    </div>
+
+    <!-- The Product Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modal-body">
+                <!-- Content will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- The Sign-In Modal -->
+    <div id="signInModal" class="sign-in-modal">
+        <div class="sign-in-modal-content">
+            <span class="close" onclick="closeSignInModal()">&times;</span>
+            <h2>Sign In</h2>
+            <form id="sign-in-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <br><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <br><br>
+                <button type="submit">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 Seeker.
+    </footer>
+
+    <script>
+        function openModal(productId) {
+            var modal = document.getElementById("modal");
+            var modalBody = document.getElementById("modal-body");
+
+            var product = document.querySelector('.product[onclick="openModal(\'' + productId + '\')"]');
+            var productContent = product.innerHTML;
+            var productDescription = product.getAttribute("data-description");
+
+            modalBody.innerHTML = productContent + '<p>' + productDescription + '</p>';
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("modal");
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById("modal");
+            var signInModal = document.getElementById("signInModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+            if (event.target == signInModal) {
+                signInModal.style.display = "none";
+            }
+        }
+
+        function openSignInModal() {
+            var signInModal = document.getElementById("signInModal");
+            signInModal.style.display = "block";
+        }
+
+        function closeSignInModal() {
+            var signInModal = document.getElementById("signInModal");
+            signInModal.style.display = "none";
+        }
+    </script>
+</body>
+</html>
